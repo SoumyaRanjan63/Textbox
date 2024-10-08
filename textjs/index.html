@@ -13,6 +13,11 @@
             width: 300px;
             height: 100px;
             margin-bottom: 10px;
+            border: none; /* Remove border */
+            outline: none; /* Remove outline on focus */
+            resize: none; /* Prevent resizing */
+            background: transparent; /* Make background transparent */
+            font-size: 16px; /* Adjust font size if needed */
         }
     </style>
 </head>
@@ -20,22 +25,30 @@
 
     <h1>Text Entry</h1>
     <textarea id="textInput" placeholder="Enter text here"></textarea>
-    <button id="saveButton">Save</button>
 
     <ul id="entryList"></ul>
 
     <script>
-        document.getElementById('saveButton').addEventListener('click', function() {
-            const textInput = document.getElementById('textInput');
-            const entryList = document.getElementById('entryList');
+        const textInput = document.getElementById('textInput');
+        const entryList = document.getElementById('entryList');
 
+        textInput.addEventListener('input', function() {
             if (textInput.value.trim() !== "") {
-                const li = document.createElement('li');
-                li.textContent = textInput.value;
-                entryList.appendChild(li);
-                textInput.value = ""; // Clear the textarea after saving
+                // Clear previous entries
+                entryList.innerHTML = ""; 
+
+                // Split input by new lines and create list items
+                const entries = textInput.value.split('\n');
+                entries.forEach(entry => {
+                    if (entry.trim() !== "") {
+                        const li = document.createElement('li');
+                        li.textContent = entry;
+                        entryList.appendChild(li);
+                    }
+                });
             } else {
-                alert("Please enter some text.");
+                // Clear the list if input is empty
+                entryList.innerHTML = "";
             }
         });
     </script>
