@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Text Entry</h1>
+    <textarea id="textInput" placeholder="Enter text here"></textarea>
+    <button id="saveButton">Save</button>
+
+    <ul id="entryList"></ul>
+
+    <script>
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const textInput = document.getElementById('textInput');
+            const entryList = document.getElementById('entryList');
+
+            if (textInput.value.trim() !== "") {
+                const li = document.createElement('li');
+                li.textContent = textInput.value;
+                entryList.appendChild(li);
+                textInput.value = ""; // Clear the textarea after saving
+            } else {
+                alert("Please enter some text.");
+            }
+        });
+    </script>
+
+</body>
+</html>
